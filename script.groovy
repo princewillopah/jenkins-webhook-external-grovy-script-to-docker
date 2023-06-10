@@ -9,7 +9,7 @@ def buildImage() {
                             sh '''
                                 docker build -t princewillopah/pipeline2-from-github-to-dockerhub:jv-mvn-app-2.0 .
                                 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                                docker push princewillopah/pipeline2-from-github-to-dockerhub:jv-mvn-app-2.0
+                                docker push princewillopah/jenkins-webhook-external-grovy-script-to-docker:jv-mvn-app-1.0
                             '''
                         }
     // withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
