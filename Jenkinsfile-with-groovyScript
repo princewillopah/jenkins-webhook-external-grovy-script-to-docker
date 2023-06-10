@@ -1,0 +1,43 @@
+def gv
+
+pipeline {
+    agent any
+    tools {
+		maven "my-maven-3.9.2"
+    } 
+    environment {
+        DOCKER_REGISTRY_CREDENTIALS = credentials('75dfb4ed-7b1d-4d34-a0ff-c06422bbbf7b')
+        DOCKER_USERNAME = "${DOCKER_REGISTRY_CREDENTIALS_USR}"
+        // DOCKER_PASSWORD = "${DOCKER_REGISTRY_CREDENTIALS_PSW}"
+    }
+    stages {
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
+        stage("build jar") {
+            steps {
+                script {
+                    gv.buildJar()
+                }
+            }
+        }
+        stage("build image") {
+            steps {
+                script {
+                    gv.buildImage()
+                }
+            }
+        }
+        stage("deploy") {
+            steps {
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+    }   
+}
