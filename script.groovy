@@ -7,7 +7,7 @@ def buildImage() {
     echo "building image && push image to docker hub"
     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                             sh '''
-                                docker build -t princewillopah/pipeline2-from-github-to-dockerhub:jv-mvn-app-2.0 .
+                                docker build -t princewillopah/pipeline2-from-github-to-dockerhub:jv-mvn-app-1.0 .
                                 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
                                 docker push princewillopah/jenkins-webhook-external-grovy-script-to-docker:jv-mvn-app-1.0
                             '''
